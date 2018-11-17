@@ -14,8 +14,10 @@ namespace TwentyOne
             Balance = begginingBalance;
             Name = name;
         }
+        private List<Card> _hand = new List<Card>();
+
         // set player properties
-        public List<Card> Hand { get; set; }
+        public List<Card> Hand { get { return _hand;  } set { _hand = value; } }
         public int Balance { get; set; }
         public string Name { get; set; }
         public bool isActivelyPlaying { get; set; }

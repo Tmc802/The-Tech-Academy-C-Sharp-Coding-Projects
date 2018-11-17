@@ -21,7 +21,7 @@ namespace TwentyOne
             // prompt the user if they'd like to start a new game
             Console.WriteLine("Hello, {0}. Would you like to join a game of 21 right now?", playerName);
             string answer = Console.ReadLine().ToLower();
-            if (answer == "Yes" || answer == "yeah" || answer == "y" || answer == "ya") {
+            if (answer == "yes" || answer == "yeah" || answer == "y" || answer == "ya") {
 
                 // instantiate the players information with the user entries above
                 Player player = new Player(playerName, bank);

@@ -24,6 +24,9 @@ namespace TwentyOne
             Dealer.Stay = false;
             Dealer.Deck = new Deck();
 
+            //shuffle new deck
+            Dealer.Deck.Shuffle();
+
             // asks each player to place a bet
             Console.WriteLine("Place your bet");
 
@@ -76,6 +79,7 @@ namespace TwentyOne
                         {
                             Dealer.Balance += entry.Value;
                         }
+                        return;
                     }
                 }
             }
@@ -106,7 +110,7 @@ namespace TwentyOne
                 if (busted)
                 {
                     Dealer.Balance += Bets[player];
-                    Console.WriteLine("{0} Busted! You lose your bet of {1}. Your balance is new {2}.", player.Name, Bets[player], player.Balance);
+                    Console.WriteLine("{0} Busted! You lose your bet of {1}. Your balance is now {2}.", player.Name, Bets[player], player.Balance);
                     Console.WriteLine("Do you want to play again?");
                     answer = Console.ReadLine().ToLower();
                     if (answer == "yes" || answer == "yeah")
@@ -136,7 +140,7 @@ namespace TwentyOne
             // options from dealers options
             if (Dealer.Stay)
             {
-                Console.WriteLine("Dealer is stayinh.");
+                Console.WriteLine("Dealer is staying.");
             }
             if (Dealer.isBusted)
             {
@@ -181,10 +185,12 @@ namespace TwentyOne
                     if (answer == "yes" || answer == "yeah")
                     {
                         player.isActivelyPlaying = true;
+                        return;
                     }
                     else
                     {
                         player.isActivelyPlaying = false;
+                        return;
                     }
                 }
             }
