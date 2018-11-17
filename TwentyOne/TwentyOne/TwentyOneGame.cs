@@ -79,6 +79,49 @@ namespace TwentyOne
                     }
                 }
             }
+            //shows the players cards when they choose to stay
+            foreach (Player player in Players) 
+            {
+                Console.WriteLine("Your cards are: ");
+                foreach (Card card in Player.Hand)
+                {
+                    Console.Write("{0} ", card.ToString());
+                }
+
+                // prompts user to hit or stay
+                Console.WriteLine("\n\nHit or stay?");
+                string answer = Console.ReadLine().ToLower();
+                if (answer == "stay")
+                {
+                    player.Stay = true;
+                    break;
+                }
+                else if (answer == "hit")
+                {
+                    Dealer.Deal(player.Hand);
+                }
+
+                // check if player has busted
+                bool busted = TwentyOneRules.IsBusted(player.Hand);
+                if (busted)
+                {
+                    Dealer.Balance += Bets[player];
+                    Console.WriteLine("{0} Busted! You lose your bet of {1}. Your balance is new {2}.", player.Name, Bets[player], player.Balance);
+                    Console.WriteLine("Do you want to play again?");
+                    answer = Console.ReadLine().ToLower();
+                    if (answer == "yes" || answer == "yeah")
+                    {
+                        player.isActivelyPlaying = true;
+                    }
+                    else 
+                    {
+                        player.isActivelyPlaying = false;
+                    }
+                }
+            }
+            // check if dealer has busted or is staying
+            Dealer.isBusted = TwentyOneRules.IsBusted(Dealer.Hand);
+            Dealer.Stay = TwentyOneRules
 
         }
 
