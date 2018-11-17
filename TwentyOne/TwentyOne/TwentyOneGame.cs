@@ -32,7 +32,7 @@ namespace TwentyOne
             {
                 int bet = Convert.ToInt32(Console.ReadLine());
                 bool successFullyBet = player.Bet(bet);
-                if (!successFullyBet) 
+                if (!successFullyBet)
                 {
                     return;
                 }
@@ -41,7 +41,7 @@ namespace TwentyOne
             for (int i = 0; i < 2; i++)
             {
                 Console.WriteLine("Dealing");
-                foreach (Player player in Player)
+                foreach (Player player in Players)
                 {
                     Console.WriteLine("{0}: ", player.Name);
                     Dealer.Deal(player.Hand);
@@ -80,10 +80,10 @@ namespace TwentyOne
                 }
             }
             //shows the players cards when they choose to stay
-            foreach (Player player in Players) 
+            foreach (Player player in Players)
             {
                 Console.WriteLine("Your cards are: ");
-                foreach (Card card in Player.Hand)
+                foreach (Card card in player.Hand)
                 {
                     Console.Write("{0} ", card.ToString());
                 }
@@ -113,7 +113,7 @@ namespace TwentyOne
                     {
                         player.isActivelyPlaying = true;
                     }
-                    else 
+                    else
                     {
                         player.isActivelyPlaying = false;
                     }
@@ -121,10 +121,74 @@ namespace TwentyOne
             }
             // check if dealer has busted or is staying
             Dealer.isBusted = TwentyOneRules.IsBusted(Dealer.Hand);
-            Dealer.Stay = TwentyOneRules
+            Dealer.Stay = TwentyOneRules.ShouldDealerStay(Dealer.Hand);
+            while (!Dealer.Stay && !Dealer.isBusted)
+            {
+                Console.WriteLine("Dealer is hitting...");
 
+                Dealer.Deal(Dealer.Hand);
+                // check for dealer busted after hitting
+                Dealer.isBusted = TwentyOneRules.IsBusted(Dealer.Hand);
+
+                //check for dealer stay after hitting
+                Dealer.Stay = TwentyOneRules.ShouldDealerStay(Dealer.Hand);
+            }
+            // options from dealers options
+            if (Dealer.Stay)
+            {
+                Console.WriteLine("Dealer is stayinh.");
+            }
+            if (Dealer.isBusted)
+            {
+                Console.WriteLine("Dealer Busted!");
+                foreach (KeyValuePair<Player, int> entry in Bets)
+
+                { //tells user the money they've won from dealers bust
+                    Console.WriteLine("{0} won {1}!", entry.Key.Name, entry.Value);
+
+                    // gives the money to the players balance
+
+                    //expression loops through each key value pair, finds the player in the list that matches the name,
+                    // takes player, takes bet balances adds to the players balance * 2
+                    Players.Where(x => x.Name == entry.Key.Name).First().Balance += (entry.Value * 2);
+                }
+                return;
+            }
+            // Compares players hands and dealers hands
+            foreach (Player player in Players)
+            {
+                bool? playerWon = TwentyOneRules.CompareHands(player.Hand, Dealer.Hand);
+                if (playerWon == null)
+                {
+                    Console.WriteLine("Push! No one wins.");
+                    player.Balance += Bets[player];
+                }
+                // releases bets to player and adds too their balance
+                else if (playerWon == true)
+                {
+                    Console.WriteLine("{0} won {1}, player.Name, Bets[player");
+                    player.Balance += (Bets[player] * 2);
+                    Dealer.Balance -= Bets[player];
+                }
+                else
+                {
+                    Console.WriteLine("Dealer wins {0}!", Bets[player]);
+                    Dealer.Balance += Bets[player];
+
+                    //asks player if they'd like to play again
+                    Console.WriteLine("Play Again?");
+                    string answer = Console.ReadLine().ToLower();
+                    if (answer == "yes" || answer == "yeah")
+                    {
+                        player.isActivelyPlaying = true;
+                    }
+                    else
+                    {
+                        player.isActivelyPlaying = false;
+                    }
+                }
+            }
         }
-
         public override void ListPlayers()
         {
             Console.WriteLine("21 Players");
