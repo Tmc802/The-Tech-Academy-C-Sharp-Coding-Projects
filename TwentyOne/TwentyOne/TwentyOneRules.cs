@@ -34,12 +34,21 @@ namespace TwentyOne
             int value = Hand.Sum(x => _cardValues[x.Face]);
             result[0] = value;
             if (result.Length == 1) return result;
+            for (int i = 1; i < result.Length; i++)
+            {
+                value += (i * 10);
+                result[i] = value;
+            }
+            return result;
         }
 
         // check for black jack using a boolean value and list
         public static bool CheckForBlackJack(List<Card> Hand)
         {
-
+            int[] possibleValues = GetAllPossibleHandValues(Hand);
+            int value = possibleValues.Max();
+            if (value == 21) return true;
+            else return false;
         }
     }
 }
