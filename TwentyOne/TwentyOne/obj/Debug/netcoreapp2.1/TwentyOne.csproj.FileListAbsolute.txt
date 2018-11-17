@@ -1,0 +1,11 @@
+/Users/tmc802/Projects/TwentyOne/TwentyOne/obj/Debug/netcoreapp2.1/TwentyOne.csprojAssemblyReference.cache
+/Users/tmc802/Projects/TwentyOne/TwentyOne/obj/Debug/netcoreapp2.1/TwentyOne.csproj.CoreCompileInputs.cache
+/Users/tmc802/Projects/TwentyOne/TwentyOne/obj/Debug/netcoreapp2.1/TwentyOne.AssemblyInfoInputs.cache
+/Users/tmc802/Projects/TwentyOne/TwentyOne/obj/Debug/netcoreapp2.1/TwentyOne.AssemblyInfo.cs
+/Users/tmc802/Projects/TwentyOne/TwentyOne/bin/Debug/netcoreapp2.1/TwentyOne.deps.json
+/Users/tmc802/Projects/TwentyOne/TwentyOne/bin/Debug/netcoreapp2.1/TwentyOne.runtimeconfig.json
+/Users/tmc802/Projects/TwentyOne/TwentyOne/bin/Debug/netcoreapp2.1/TwentyOne.runtimeconfig.dev.json
+/Users/tmc802/Projects/TwentyOne/TwentyOne/bin/Debug/netcoreapp2.1/TwentyOne.dll
+/Users/tmc802/Projects/TwentyOne/TwentyOne/bin/Debug/netcoreapp2.1/TwentyOne.pdb
+/Users/tmc802/Projects/TwentyOne/TwentyOne/obj/Debug/netcoreapp2.1/TwentyOne.dll
+/Users/tmc802/Projects/TwentyOne/TwentyOne/obj/Debug/netcoreapp2.1/TwentyOne.pdb
