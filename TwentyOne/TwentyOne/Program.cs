@@ -23,7 +23,7 @@ namespace TwentyOne
             string answer = Console.ReadLine().ToLower();
             if (answer == "Yes" || answer == "yeah" || answer == "y" || answer == "ya") {
 
-                // istantiate the players information with the user entries above
+                // instantiate the players information with the user entries above
                 Player player = new Player(playerName, bank);
                 Game game = new TwentyOneGame();
                 game += player;

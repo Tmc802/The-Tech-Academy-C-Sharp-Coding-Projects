@@ -1,15 +1,28 @@
 ﻿<Properties StartupConfiguration="{46B93190-AC0D-4E94-B372-CBDB74FAA4F6}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TwentyOne/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TwentyOne/TwentyOneRules.cs">
     <Files>
-      <File FileName="TwentyOne/Game.cs" Line="22" Column="14" />
-      <File FileName="TwentyOne/Program.cs" Line="14" Column="13" />
+      <File FileName="TwentyOne/Game.cs" Line="15" Column="9" />
+      <File FileName="TwentyOne/Program.cs" Line="31" Column="17" />
+      <File FileName="TwentyOne/Player.cs" Line="37" Column="14" />
       <File FileName="TwentyOne/Card.cs" Line="9" Column="23" />
-      <File FileName="TwentyOne/TwentyOneGame.cs" Line="23" Column="10" />
-      <File FileName="TwentyOne/Player.cs" Line="18" Column="1" />
-      <File FileName="TwentyOne/Dealer.cs" Line="19" Column="36" />
+      <File FileName="TwentyOne/TwentyOneGame.cs" Line="46" Column="25" />
+      <File FileName="TwentyOne/Dealer.cs" Line="11" Column="40" />
       <File FileName="TwentyOne/IWalkAway.cs" Line="13" Column="6" />
-      <File FileName="TwentyOne/Deck.cs" Line="13" Column="13" />
+      <File FileName="TwentyOne/Deck.cs" Line="1" Column="1" />
+      <File FileName="TwentyOne/TwentyOneDealer.cs" Line="1" Column="1" />
+      <File FileName="TwentyOne/TwentyOneRules.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TwentyOne" expanded="True">
+            <Node name="TwentyOne" expanded="True">
+              <Node name="TwentyOneRules.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
