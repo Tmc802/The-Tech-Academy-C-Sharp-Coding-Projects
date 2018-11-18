@@ -27,13 +27,20 @@ namespace TwentyOne
             //shuffle new deck
             Dealer.Deck.Shuffle();
 
-            // asks each player to place a bet
-            Console.WriteLine("Place your bet");
+   
 
-            // foreach loop adds each players bet to the pool
+            // foreach loop adds player bet to the pool
             foreach (Player player in Players)
             {
-                int bet = Convert.ToInt32(Console.ReadLine());
+                bool validAnswer = false;
+                int bet = 0;
+                while (!validAnswer)
+                {
+                    Console.WriteLine("Place your bet!");
+                    validAnswer = int.TryParse(Console.ReadLine(), out bet);
+                    if (!validAnswer) Console.WriteLine("Please enter digits only, no decimals.");
+                }
+
                 bool successFullyBet = player.Bet(bet);
                 if (!successFullyBet)
                 {
@@ -48,6 +55,13 @@ namespace TwentyOne
                 {
                     Console.WriteLine("{0}: ", player.Name);
                     Dealer.Deal(player.Hand);
+
+
+
+
+
+
+
 
                     // logic check for blackjack
                     if (i == 1)
