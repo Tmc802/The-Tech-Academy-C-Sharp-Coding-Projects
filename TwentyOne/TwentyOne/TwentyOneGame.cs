@@ -41,6 +41,11 @@ namespace TwentyOne
                     if (!validAnswer) Console.WriteLine("Please enter digits only, no decimals.");
                 }
 
+                if ( bet < 0)
+                {
+                    throw new FraudException();
+                }
+
                 bool successFullyBet = player.Bet(bet);
                 if (!successFullyBet)
                 {

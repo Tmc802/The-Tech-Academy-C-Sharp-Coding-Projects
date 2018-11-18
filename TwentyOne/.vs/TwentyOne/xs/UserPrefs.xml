@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{46B93190-AC0D-4E94-B372-CBDB74FAA4F6}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TwentyOne/TwentyOneGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TwentyOne/FraudException.cs">
     <Files>
-      <File FileName="TwentyOne/Program.cs" Line="20" Column="13" />
-      <File FileName="TwentyOne/TwentyOneGame.cs" Line="62" Column="21" />
+      <File FileName="TwentyOne/Program.cs" Line="65" Column="56" />
+      <File FileName="TwentyOne/TwentyOneGame.cs" Line="46" Column="51" />
+      <File FileName="TwentyOne/FraudException.cs" Line="6" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
