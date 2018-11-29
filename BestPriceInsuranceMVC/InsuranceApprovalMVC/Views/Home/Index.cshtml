@@ -1,0 +1,72 @@
+﻿
+<div class="jumbotron">
+    <h1>BestPrice Insurance</h1>
+</div>
+
+<div>
+    <p>
+        Tired of your old insurance companies outrageous prices? Enter your information below to get your new discounted insurance rate!
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        
+        <div>
+            @using (Html.BeginForm("ViewQuote", "Home", FormMethod.Post))
+            {
+            <div>
+                <label for="fName">First Name:</label>
+                <input type="text" name="firstName" id="fName" value="First Name" required />
+            </div>
+
+            <div>
+                <label for="lName">Last Name:</label>
+                <input type="text" name="lastName" id="lName" value="Last Name" required />
+            </div>
+
+            <div>
+                <label for="email">Email Adrress:</label>
+                <input type="email" name="emailAddress" id="email" value="Email Address" required />
+            </div>
+
+            <div>
+                <label for="DOB">Date Of Birth:</label>
+                <input type="date" name="DOB" id="DOB" required />
+            </div>
+
+            <div>
+                <label for="carYear">Car Year:</label>
+                <input type="number" name="carYear" id="carYear" value="Year" required />
+            </div>
+
+            <div>
+                <label for="carMake">Car Make:</label>
+                <input type="text" name="carMake" id="carMake" value="Make" required />
+            </div>
+
+            <div>
+                <label for="Car Model">Car Model:</label>
+                <input type="text" name="carModel" id="carModel" value="Model" required />
+            </div>
+
+            <div>
+                <label for="DUI">Have you ever had a DUI? Please answer Yes or No:</label>
+                <input type="text" name="DUI" id="DUI" value="Yes or No" required />
+            </div>
+
+            <div>
+                <label for="speedingTickets">How many speeding tickets do you have? Please enter a number:</label>
+                <input type="number" name="speedingTickets" id="speedingTickets" value="Enter a number here" required />
+            </div>
+
+            <div>
+                <label for="fullCoverage">Would you like full coverage or liability? Please answer Yes or No:</label>
+                <input type="text" name="fullCoverage" id="fullCoverage" value="Yes or No" required />
+            </div>
+
+              <div>
+                 <input type="submit" value="Submit" />
+               </div>
+            }
+</div>

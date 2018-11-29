@@ -1,0 +1,16 @@
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\CodeFirstApp.exe.config
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\CodeFirstApp.exe
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\CodeFirstApp.pdb
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\EntityFramework.dll
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\EntityFramework.xml
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.csprojAssemblyReference.cache
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.csproj.CoreCompileInputs.cache
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.csproj.CopyComplete
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.exe
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.pdb
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.Migrations.AddUrl.resources
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.csproj.GenerateResource.cache
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.Migrations.AddUser.resources
+C:\Users\tmcin\source\repos\CodeFirstApp\CodeFirstApp\obj\Debug\CodeFirstApp.Migrations.ChangeDisplayName.resources
