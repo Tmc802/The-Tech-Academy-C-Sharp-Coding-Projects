@@ -11,7 +11,7 @@ namespace InsuranceApprovalMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string connectionString = @"Data Source=DESKTOP-RJLQT5A\SQLEXPRESS;Initial Catalog=BestPriceInsurance;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString = @"Data Source=DESKTOP-UDKTPG7\SQLEXPRESS;Initial Catalog=BestPriceDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public ActionResult Index()
         {
