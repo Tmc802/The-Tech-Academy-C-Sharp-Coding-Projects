@@ -1,0 +1,70 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.formStyle {
+    background: rgba(169, 169, 169, .5);
+    font-weight: bold;
+    border-radius: 1%;
+}
+
+.formStyleContact {
+    background: rgba(169, 169, 169, .5);
+    font-weight: bold;
+    border-radius: 1%;
+    
+}
+
+.contactTeamPhoto {
+    height: auto;
+    width: 60% !important;
+    background-image: url('../SuccessfulPeople.jpeg');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 5%;
+}
+
+.contactForm {
+    display: inline-block;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.jumbotron {
+    color: lightseagreen;
+    background: url('../HappyCustomer.jpg') no-repeat;
+    background-size: 100% 100%;
+    height: 40em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    text-shadow: 1px 1px black;
+}
+
+.jumboSubTitle {
+    font-size: 5em !important;
+    padding-top: 7%;
+    width: 50%;
+    margin: 0 auto;
+    text-decoration: underline red;
+}
+
+.submitBtnBox {
+    padding-bottom: 2%;
+}

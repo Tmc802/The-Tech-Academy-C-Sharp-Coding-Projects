@@ -1,0 +1,84 @@
+﻿@using CarInsurance.Models
+@model List<CarInsurance.Models.BestPriceQuotes>
+
+<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+        <div class="card-header text-center">
+            <h5 class="m-0">Customer Database</h5>
+        </div>
+
+
+
+        <div class="card-body">
+            @foreach (var customer in Model)
+            {
+
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                        <li>
+                            <div class="col">
+                                @customer.firstName
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.lastName
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.DOB
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.carYear
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.carMake
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.carModel
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="col">
+                                @customer.DUI
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.speedingTickets
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col">
+                                @customer.fullCoverage
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <br />
+            }
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
