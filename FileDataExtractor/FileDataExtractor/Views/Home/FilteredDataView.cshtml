@@ -1,0 +1,103 @@
+﻿@using System.Data;
+
+
+<div>
+    <div style="margin-top: 2%;">
+        <h2>Filter your data:</h2>
+        @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
+        {
+            <label style="padding-left:1%;" labelfor="file path">
+                Remote CSV:
+            </label>
+            <input type="url" name="url" placeholder="Enter URL" required />
+
+            @* Column Selection *@
+            <label style="padding-left:1%;" labelfor="file path">
+                Column:
+            </label>
+            <select class="custom-select" name="column" required>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <option>@col</option>
+                }
+            </select>
+
+            @* Operation Selection *@
+            <label style="padding-left:1%;" labelfor="sign">sign:</label>
+            <select class="custom-select" name="sign" required>
+                <option>></option>
+                <option><</option>
+                <option>>=</option>
+                <option><=</option>
+            </select>
+
+            @*Ref Point*@
+            <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+            <input type="number" name="operand" placeholder="number" required />
+
+            @* Sort option *@
+            <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
+            <select class="custom-select" name="sortOrder" required>
+                <option selected="">ASC</option>
+                <option>DESC</option>
+            </select>
+
+            <div style="display:inline; margin-left:1%;" id=submitBox>
+                <input type="submit" class="btn btn-primary btn-primary" value="Filter" />
+                <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile","Home")'" value="Start Over" />
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@* Full Results table *@
+<div style="margin-top:2%;">
+    <table style="border-style:solid; border-color:black; width:100%;">
+        @{
+            if (Model != null)
+            {
+                <thead style="font-weight:bold;">
+                    @for (int i = 0; i < Model.Columns.Count; i++)
+                    {
+                    <td style="text-align:center;">
+                        &nbsp;@Model.Columns[i]
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                }
+                    </thead>
+
+
+
+                    foreach (DataRow row in Model.Rows)
+                    {
+                        <tbody>
+                            <tr>
+                                @foreach (DataColumn col in Model.Columns)
+                                {
+
+                                    <td style="text-decoration:underline; text-align:center;">@row[col.ColumnName].ToString()</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                }
+                            </tr>
+                        </tbody>
+                    }
+                }
+        }
+    </table>
+</div>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Data File Extractor</title>
+    @Styles.Render("~/Content/bootstrap.lumen.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav style="width:100%;white-space: nowrap;" class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a href="#">@Html.ActionLink("Data Extractor", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color:white !important" })</a>
+    </nav>
+    <div @*class="container body-content"*@>
+        @RenderBody()
+        <hr />
+        <footer style="margin-top:15%;">
+            <p>&copy; @DateTime.Now.Year - Designed by Tyler McIntyre</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

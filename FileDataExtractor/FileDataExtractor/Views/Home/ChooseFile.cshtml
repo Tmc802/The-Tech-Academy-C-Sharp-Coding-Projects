@@ -1,0 +1,19 @@
+﻿<div class="container">
+    <div>
+        <h1>Choose your file:</h1>
+
+        <div style="margin-top: 2%;">
+            @using (Html.BeginForm("ViewData", "Home", FormMethod.Post))
+            {
+            <label labelfor="file path">
+                Remote CSV:
+            </label>
+
+            <input type="url" name="url" placeholder="Enter URL" required/>
+
+            <input style="margin-left:0.5%;" type="submit" class="btn btn-primary btn-primary" value="Parse data" />
+            }
+        </div>
+            
+    </div>
+</div>
