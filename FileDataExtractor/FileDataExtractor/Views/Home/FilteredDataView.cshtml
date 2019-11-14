@@ -1,54 +1,167 @@
 ﻿@using System.Data;
 
 
-<div>
-    <div style="margin-top: 2%;">
-        <h2>Filter your data:</h2>
-        @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
-        {
-            <label style="padding-left:1%;" labelfor="file path">
-                Remote CSV:
-            </label>
-            <input type="url" name="url" placeholder="Enter URL" required />
+    <div>
+        <div style="margin-top: 2%;">
+            <h2>Filter your data:</h2>
+            @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
+            {
+                <label style="padding-left:1%;" labelfor="file path">
+                    Remote CSV:
+                </label>
+                <input type="url" name="url" placeholder="Enter URL" required />
 
-            @* Column Selection *@
-            <label style="padding-left:1%;" labelfor="file path">
-                Column:
-            </label>
-            <select class="custom-select" name="column" required>
-                @foreach (DataColumn col in Model.Columns)
-                {
-                    <option>@col</option>
-                }
-            </select>
+                @* Column Selection *@
+                <label style="padding-left:1%;" labelfor="file path">
+                    Column:
+                </label>
+                <select class="custom-select" name="column" required>
+                    @foreach (DataColumn col in Model.Columns)
+                    {
+                        <option>@col</option>
+                    }
+                </select>
 
-            @* Operation Selection *@
-            <label style="padding-left:1%;" labelfor="sign">sign:</label>
-            <select class="custom-select" name="sign" required>
-                <option>></option>
-                <option><</option>
-                <option>>=</option>
-                <option><=</option>
-            </select>
+                @* Operation Selection *@
+                <label style="padding-left:1%;" labelfor="sign">sign:</label>
+                <select class="custom-select" name="sign" required>
+                    <option>=</option>
+                    <option>></option>
+                    <option><</option>
+                    <option>>=</option>
+                    <option><=</option>
+                </select>
 
-            @*Ref Point*@
-            <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
-            <input type="number" name="operand" placeholder="number" required />
+                @*Ref Point*@
+                <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+                <input type="number" name="operand" placeholder="number" required />
 
-            @* Sort option *@
-            <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
-            <select class="custom-select" name="sortOrder" required>
-                <option selected="">ASC</option>
-                <option>DESC</option>
-            </select>
+                @* Sort option *@
+                <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
+                <select class="custom-select" name="sortOrder" required>
+                    <option selected="">ASC</option>
+                    <option>DESC</option>
+                </select>
 
-            <div style="display:inline; margin-left:1%;" id=submitBox>
-                <input type="submit" class="btn btn-primary btn-primary" value="Filter" />
-                <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile","Home")'" value="Start Over" />
-            </div>
-        }
+                <div style="display:inline; margin-left:1%;" id=submitBox>
+                    <input type="submit" class="btn btn-primary btn-primary" value="Filter" />
+                    <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile", "Home")'" value="Start Over" />
+                </div>
+
+                <div style="margin-top:1%;">
+                    @* Row count *@
+                    @{
+                        int RowCount = Model.Rows.Count;
+                        int ColumnCount = Model.Columns.Count;
+                    }
+
+                    <h3 style="display:inline; margin-left:2%; font-weight:bold;">
+                        <p># of Columns: @ColumnCount</p>
+                        <p># of rows: @RowCount</p>
+                    </h3>
+                </div>
+
+            }
+
+            @* XML Download *@
+
+            @using (Html.BeginForm("DownloadXMLFiltered", "Home", FormMethod.Post))
+            {
+
+                <label style="padding-left:1%;" labelfor="file path">
+                    Download Remote CSV as XML:
+                </label>
+
+                <input type="url" name="url" placeholder="Enter URL" required />
+
+                @* Column Selection *@
+                <label style="padding-left:1%;" labelfor="file path">
+                    Column:
+                </label>
+                <select class="custom-select" name="column" required>
+                    @foreach (DataColumn col in Model.Columns)
+                    {
+                        <option>@col</option>
+                    }
+                </select>
+
+                @* Operation Selection *@
+                <label style="padding-left:1%;" labelfor="sign">sign:</label>
+                <select class="custom-select" name="sign" required>
+                    <option>=</option>
+                    <option>></option>
+                    <option><</option>
+                    <option>>=</option>
+                    <option><=</option>
+                </select>
+
+                @*Ref Point*@
+                <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+                <input type="number" name="operand" placeholder="number" required />
+
+                @* Sort option *@
+                <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
+                <select class="custom-select" name="sortOrder" required>
+                    <option selected="">ASC</option>
+                    <option>DESC</option>
+                </select>
+
+                <div style="display:inline; margin-left:1%;" id=submitBox>
+                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+                </div>
+
+            }
+
+            @* JSON Download *@
+
+            @using (Html.BeginForm("DownloadJSONFiltered", "Home", FormMethod.Post))
+            {
+
+                <label style="padding-left:1%; padding-top:0.5%;" labelfor="file path">
+                    Download Remote CSV as JSON:
+                </label>
+
+                <input type="url" name="url" placeholder="Enter URL" required />
+
+                @* Column Selection *@
+                <label style="padding-left:1%;" labelfor="file path">
+                    Column:
+                </label>
+                <select class="custom-select" name="column" required>
+                    @foreach (DataColumn col in Model.Columns)
+                    {
+                        <option>@col</option>
+                    }
+                </select>
+
+                @* Operation Selection *@
+                <label style="padding-left:1%;" labelfor="sign">sign:</label>
+                <select class="custom-select" name="sign" required>
+                    <option>=</option>
+                    <option>></option>
+                    <option><</option>
+                    <option>>=</option>
+                    <option><=</option>
+                </select>
+
+                @*Ref Point*@
+                <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+                <input type="number" name="operand" placeholder="number" required />
+
+                @* Sort option *@
+                <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
+                <select class="custom-select" name="sortOrder" required>
+                    <option selected="">ASC</option>
+                    <option>DESC</option>
+                </select>
+
+                <div style="display:inline; margin-left:1%;" id=submitBox>
+                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+                </div>
+
+            }
+        </div>
     </div>
-</div>
 
 
 
@@ -101,3 +214,14 @@
         }
     </table>
 </div>
+
+
+@section scripts{
+    <script>
+        function btn_count_entries() {
+            var e = document.getElementById("countDropdown");
+            var strUser = e.options[e.selectedIndex];
+            alert(strUser.innerHTML);
+        }
+    </script>
+}

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
-using LumenWorks.Framework.IO.Csv;
 
 namespace FileDataExtractor.Models
 {
@@ -14,8 +11,7 @@ namespace FileDataExtractor.Models
 
     public class GetCSVFile
     {
-        //public List<string> parsedCSV = new List<string>();        
-        
+
         public DataTable GetCSV(string url)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url); // web request

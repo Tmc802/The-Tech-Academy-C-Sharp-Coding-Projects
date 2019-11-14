@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FileDataExtractor.Models;
-using LumenWorks.Framework.IO;
 using System.IO;
-using LumenWorks.Framework.IO.Csv;
 using System.Data;
-using System;
+using System.Net;
+using System.Web;
 
 namespace FileDataExtractor.Controllers
 {
@@ -23,58 +21,123 @@ namespace FileDataExtractor.Controllers
 
         public ActionResult ViewData(string url)
         {
-            //var url = "https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD";
-            //Method 1
             GetCSVFile newURL = new GetCSVFile();
-
-            DataTable dt = newURL.GetCSV(url); // feed the url into the parser
-
-            var Model = dt; // pass the data to a datatable object "Model"
-
-            return View(Model);
+            DataTable dt = newURL.GetCSV(url);
+            return View(dt);
         }
 
         public ActionResult FilteredDataView(string column, string sign, int operand, string url, string sortOrder)
         {
+            GetCSVFile newURL = new GetCSVFile(); 
+            DataTable dt = newURL.GetCSV(url);
+            FilteredDT dtSorted = new FilteredDT();
 
-            // parse the url again
-            GetCSVFile newURL = new GetCSVFile();
-             
-            DataTable dt = newURL.GetCSV(url); // feed the url into the parser
-
-            DataTable filtDataTable = new DataTable(); // create a datatable to display the results of the filtered data
-
-            // send the column names to a new filtered data table
-            foreach(DataColumn col in dt.Columns)
-            {
-                filtDataTable.Columns.Add(col.ColumnName, col.DataType);
+            return View(dtSorted.FilterData(column, sign, operand, url, sortOrder, dt));
             }
 
-            // Create the expression
-            string expression = "[" + column + "]" + sign + operand;
-            DataRow[] foundRows; // add the filtered data to a datarow array
-            
-            // Use the Select method to find all rows matching the filter.
-            foundRows = dt.Select(expression);
 
-            //Add the array foundRows to a new datatable
-            foreach (DataRow row in foundRows)
-            {
-                var r = filtDataTable.Rows.Add();
-                foreach (DataColumn col in filtDataTable.Columns)
-                {
-                    r[col.ColumnName] = row[col.ColumnName];
-                }
-            }
 
-            // set the sort order of filtered data
-            filtDataTable.DefaultView.Sort = "[" +column+ "]"+ " " + sortOrder;
-            // set the sorted data to a new DataTable object
-            DataTable dtSorted = filtDataTable.DefaultView.ToTable();
 
-            var Model = dtSorted;
 
-            return View(Model);
-            }
+        public void DownloadXML(string url)
+        {
+            GetCSVFile newFile = new GetCSVFile();
+            DataTable dt = newFile.GetCSV(url);
+
+            ConvertToXML XMLString = new ConvertToXML();
+            DataSet ds = XMLString.DataSetToXML(dt);
+
+            HttpResponseBase response = HttpContext.Response;
+
+            string fileName = "ExportedXML.xml";
+
+            response.StatusCode = 200;
+
+            response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            response.AddHeader("Content-Transfer-Encoding", "binary");
+            response.ContentType = "application-download";
+            response.Write(ds.GetXml());
         }
+
+        public void DownloadXMLFiltered(string column, string sign, int operand, string url, string sortOrder)
+        {
+            GetCSVFile newFile = new GetCSVFile();
+            DataTable dt = newFile.GetCSV(url);
+            FilteredDT st = new FilteredDT();
+            var dsSorted = st.FilterData(column, sign, operand, url, sortOrder, dt);
+
+            ConvertToXML XMLString = new ConvertToXML();
+            DataSet ds = XMLString.DataSetToXML(dsSorted);
+
+            HttpResponseBase response = HttpContext.Response;
+
+            string fileName = "ExportedXML.xml";
+
+            response.StatusCode = 200;
+
+            response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            response.AddHeader("Content-Transfer-Encoding", "binary");
+            response.ContentType = "application-download";
+            response.Write(ds.GetXml());
+        }
+
+
+        public void DownloadJSON(string url)
+        {
+            GetCSVFile newFile = new GetCSVFile(); // new GetCSVFile object
+            DataTable dt = newFile.GetCSV(url); // use the GetCSV parser
+            ConvertToJSON newJSONFile = new ConvertToJSON();
+
+            HttpResponseBase response = HttpContext.Response;
+
+            string fileName = "ExportedJSON.json";
+
+            response.StatusCode = 200;
+            response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            response.AddHeader("Content-Transfer-Encoding", "binary");
+            response.ContentType = "application-download";
+            response.Write(newJSONFile.ConvertDataTabletoString(dt).ToString());
+        }
+
+        public void DownloadJSONFiltered(string column, string sign, int operand, string url, string sortOrder)
+        {
+            GetCSVFile newFile = new GetCSVFile();
+            DataTable dt = newFile.GetCSV(url);
+            FilteredDT st = new FilteredDT();
+            var dsSorted = st.FilterData(column, sign, operand, url, sortOrder, dt);
+            ConvertToJSON newJSONFile = new ConvertToJSON();
+
+            HttpResponseBase response = HttpContext.Response;
+
+            string fileName = "ExportedJSON.json";
+
+            response.StatusCode = 200;
+            response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            response.AddHeader("Content-Transfer-Encoding", "binary");
+            response.ContentType = "application-download";
+            response.Write(newJSONFile.ConvertDataTabletoString(dsSorted).ToString());
+        }
+
+
+
+
+
+
+
+        public void DownloadRawData(string url)
+        {
+            RawData sr = new RawData();
+            sr.dataRequest(url);
+
+            HttpResponseBase response = HttpContext.Response;
+
+            string fileName = "ExportedRawData.txt";
+
+            response.StatusCode = 200;
+            response.AddHeader("content-disposition", "attachment; filename=" + fileName);
+            response.AddHeader("Content-Transfer-Encoding", "binary");
+            response.ContentType = "application-download";
+            response.Write(sr);
+        }
+    }
 }
