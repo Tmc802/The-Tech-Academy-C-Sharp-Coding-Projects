@@ -10,6 +10,12 @@ namespace FileDataExtractor.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ActionResult modaltest()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -153,7 +159,7 @@ namespace FileDataExtractor.Controllers
         public void DownloadRawData(string url)
         {
             RawData sr = new RawData();
-            sr.dataRequest(url);
+            string rd = sr.dataRequest(url);
 
             HttpResponseBase response = HttpContext.Response;
 
@@ -163,7 +169,7 @@ namespace FileDataExtractor.Controllers
             response.AddHeader("content-disposition", "attachment; filename=" + fileName);
             response.AddHeader("Content-Transfer-Encoding", "binary");
             response.ContentType = "application-download";
-            response.Write(sr);
+            response.Write(rd);
         }
     }
 }

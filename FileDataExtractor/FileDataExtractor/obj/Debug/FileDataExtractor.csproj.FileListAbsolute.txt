@@ -79,9 +79,6 @@ C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\obj\Debug\FileDa
 C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\obj\Debug\FileDataExtractor.csproj.CopyComplete
 C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\obj\Debug\FileDataExtractor.dll
 C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\obj\Debug\FileDataExtractor.pdb
-C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\bin\CsvHelper.dll
 C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\bin\FileHelpers.dll
 C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\bin\FileHelpers.xml
-C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\bin\LumenWorks.Framework.IO.dll
-C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\bin\LumenWorks.Framework.IO.xml
 C:\Users\tmcin\source\repos\FileDataExtractor\FileDataExtractor\obj\Debug\FileDataExtractor.csprojAssemblyReference.cache

@@ -6,6 +6,8 @@ namespace FileDataExtractor
     public class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+
+        
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -21,12 +23,15 @@ namespace FileDataExtractor
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/Views.js"));
+                      "~/Scripts/Views.js",
+                      "~/Scripts/boostrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/lumen.css"));
+                      "~/Content/bootswatch/superhero/bootstrap.css",
+                      "~/Content/bootswatch/superhero/_bootswatch.scss",
+                      "~/Content/bootswatch/superhero/_variables.scss"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

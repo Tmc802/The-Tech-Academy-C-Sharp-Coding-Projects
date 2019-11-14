@@ -50,7 +50,8 @@ namespace FileDataExtractor.Models
                     }
                 }
             }
-                sr.Close();
+
+            sr.Close();
 
             return dtCsv;
         }
