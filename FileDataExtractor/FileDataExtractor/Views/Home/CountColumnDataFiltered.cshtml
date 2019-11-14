@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "CountDataFiltered";
+}
+    <div class="container">
+        <h2>Filtered Table Data Count:</h2>
+        <h3>@ViewBag.response</h3>
+        <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile", "Home")'" value="Start Over" />
+    </div>

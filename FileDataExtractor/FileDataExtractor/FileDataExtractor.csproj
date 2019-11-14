@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="Models\ConvertToJSON.cs" />
     <Compile Include="Models\ConvertToXML.cs" />
+    <Compile Include="Models\CountColumnData.cs" />
     <Compile Include="Models\DownloadFile.cs" />
     <Compile Include="Models\FilteredDT.cs" />
     <Compile Include="Models\GetCSVFile.cs" />
@@ -194,9 +195,13 @@
     <Content Include="Views\Home\ViewData.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FilteredDataView.cshtml" />
+    <Content Include="Views\Home\CountColumnData.cshtml" />
+    <Content Include="Views\Home\CountColumnDataFiltered.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\File\" />
+    <Folder Include="Views\Download\" />
+    <Folder Include="Views\Filter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

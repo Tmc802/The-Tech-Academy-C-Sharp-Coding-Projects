@@ -4,6 +4,7 @@ using System.IO;
 using System.Data;
 using System.Net;
 using System.Web;
+using System.Collections.Generic;
 
 namespace FileDataExtractor.Controllers
 {
@@ -26,19 +27,50 @@ namespace FileDataExtractor.Controllers
             return View(dt);
         }
 
+
+        // Filter controller calls
+        public ActionResult CountColumnData(string column, string url)
+        {
+
+            GetCSVFile newURL = new GetCSVFile();
+            DataTable dt = newURL.GetCSV(url);
+
+            CountColumnData columnDataCount = new CountColumnData();
+            var response = columnDataCount.countData(column, dt);
+            ViewBag.response = response;
+
+            return View();
+        }
+
+        public ActionResult CountColumnDataFiltered(string column, string sign, int operand, string url)
+        {
+            //string url = "https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD";
+            //string column = "JURISDICTION NAME";
+            string sortOrder = "ASC";
+
+            GetCSVFile newURL = new GetCSVFile();
+            DataTable dt = newURL.GetCSV(url);
+            FilteredDT dtSorted = new FilteredDT();
+            DataTable dts = dtSorted.FilterData(column, sign, operand, url, sortOrder, dt);
+
+            CountColumnData columnDataCount = new CountColumnData();
+            var response = columnDataCount.countData(column, dts);
+            ViewBag.response = response;
+
+            return View();
+        }
+
         public ActionResult FilteredDataView(string column, string sign, int operand, string url, string sortOrder)
         {
-            GetCSVFile newURL = new GetCSVFile(); 
+            GetCSVFile newURL = new GetCSVFile();
             DataTable dt = newURL.GetCSV(url);
             FilteredDT dtSorted = new FilteredDT();
 
             return View(dtSorted.FilterData(column, sign, operand, url, sortOrder, dt));
-            }
+        }
 
 
-
-
-
+        // Download Controller Calls
         public void DownloadXML(string url)
         {
             GetCSVFile newFile = new GetCSVFile();
@@ -117,12 +149,6 @@ namespace FileDataExtractor.Controllers
             response.ContentType = "application-download";
             response.Write(newJSONFile.ConvertDataTabletoString(dsSorted).ToString());
         }
-
-
-
-
-
-
 
         public void DownloadRawData(string url)
         {

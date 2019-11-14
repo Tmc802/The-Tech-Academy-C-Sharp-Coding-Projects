@@ -33,7 +33,7 @@ namespace FileDataExtractor.Models
                         {
                             for (int j = 0; j < rowValues.Count(); j++)
                             {
-                                dtCsv.Columns.Add(rowValues[j], typeof(double)); // add headers
+                                dtCsv.Columns.Add(rowValues[j], typeof(string)); // add headers
                             }
                         }
                         else

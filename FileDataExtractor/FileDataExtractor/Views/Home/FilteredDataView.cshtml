@@ -1,12 +1,13 @@
 ﻿@using System.Data;
 
-
-    <div>
-        <div style="margin-top: 2%;">
-            <h2>Filter your data:</h2>
-            @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
-            {
-                <label style="padding-left:1%;" labelfor="file path">
+@* Box 1 *@
+    <div style="width:36%;" class="card mb-3">
+        @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
+        {
+            <div style="padding-bottom:1%;">
+                <!--Box 1.1-->
+                <h2>Filter your data:</h2>
+                <label labelfor="file path">
                     Remote CSV:
                 </label>
                 <input type="url" name="url" placeholder="Enter URL" required />
@@ -31,9 +32,13 @@
                     <option>>=</option>
                     <option><=</option>
                 </select>
+            </div>
+            <!--/Box 1.1-->
 
+            <!--Box 1.2-->
+            <div style="padding-bottom:1%;">
                 @*Ref Point*@
-                <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+                <label labelfor="refPoint">Reference Point:</label>
                 <input type="number" name="operand" placeholder="number" required />
 
                 @* Sort option *@
@@ -43,185 +48,229 @@
                     <option>DESC</option>
                 </select>
 
-                <div style="display:inline; margin-left:1%;" id=submitBox>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Filter" />
-                    <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile", "Home")'" value="Start Over" />
-                </div>
 
-                <div style="margin-top:1%;">
-                    @* Row count *@
-                    @{
-                        int RowCount = Model.Rows.Count;
-                        int ColumnCount = Model.Columns.Count;
-                    }
-
-                    <h3 style="display:inline; margin-left:2%; font-weight:bold;">
-                        <p># of Columns: @ColumnCount</p>
-                        <p># of rows: @RowCount</p>
-                    </h3>
-                </div>
-
-            }
-
-            @* XML Download *@
-
-            @using (Html.BeginForm("DownloadXMLFiltered", "Home", FormMethod.Post))
-            {
-
-                <label style="padding-left:1%;" labelfor="file path">
-                    Download Remote CSV as XML:
-                </label>
-
-                <input type="url" name="url" placeholder="Enter URL" required />
-
-                @* Column Selection *@
-                <label style="padding-left:1%;" labelfor="file path">
-                    Column:
-                </label>
-                <select class="custom-select" name="column" required>
-                    @foreach (DataColumn col in Model.Columns)
-                    {
-                        <option>@col</option>
-                    }
-                </select>
-
-                @* Operation Selection *@
-                <label style="padding-left:1%;" labelfor="sign">sign:</label>
-                <select class="custom-select" name="sign" required>
-                    <option>=</option>
-                    <option>></option>
-                    <option><</option>
-                    <option>>=</option>
-                    <option><=</option>
-                </select>
-
-                @*Ref Point*@
-                <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
-                <input type="number" name="operand" placeholder="number" required />
-
-                @* Sort option *@
-                <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
-                <select class="custom-select" name="sortOrder" required>
-                    <option selected="">ASC</option>
-                    <option>DESC</option>
-                </select>
-
-                <div style="display:inline; margin-left:1%;" id=submitBox>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                </div>
-
-            }
-
-            @* JSON Download *@
-
-            @using (Html.BeginForm("DownloadJSONFiltered", "Home", FormMethod.Post))
-            {
-
-                <label style="padding-left:1%; padding-top:0.5%;" labelfor="file path">
-                    Download Remote CSV as JSON:
-                </label>
-
-                <input type="url" name="url" placeholder="Enter URL" required />
-
-                @* Column Selection *@
-                <label style="padding-left:1%;" labelfor="file path">
-                    Column:
-                </label>
-                <select class="custom-select" name="column" required>
-                    @foreach (DataColumn col in Model.Columns)
-                    {
-                        <option>@col</option>
-                    }
-                </select>
-
-                @* Operation Selection *@
-                <label style="padding-left:1%;" labelfor="sign">sign:</label>
-                <select class="custom-select" name="sign" required>
-                    <option>=</option>
-                    <option>></option>
-                    <option><</option>
-                    <option>>=</option>
-                    <option><=</option>
-                </select>
-
-                @*Ref Point*@
-                <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
-                <input type="number" name="operand" placeholder="number" required />
-
-                @* Sort option *@
-                <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
-                <select class="custom-select" name="sortOrder" required>
-                    <option selected="">ASC</option>
-                    <option>DESC</option>
-                </select>
-
-                <div style="display:inline; margin-left:1%;" id=submitBox>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                </div>
-
-            }
-        </div>
+                <input type="submit" class="btn btn-primary btn-primary" value="Filter" />
+                <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile", "Home")'" value="Start Over" />
+            </div>
+            <!-- /Box 1.2-->
+        }
     </div>
+            @* /Box 1 *@
 
 
+            @* Box 2 *@
+            @* Row count *@
+<div style="width:36%; padding-top:0.5%;" class="card mb-3">
+    @using (Html.BeginForm("CountColumnDataFiltered", "Home", FormMethod.Post))
+    {
+        <h3>Count Column Data:</h3>
+        <label padding-top:0.5%;" labelfor="file path">
+            Remote CSV:
+        </label>
 
-@* Full Results table *@
-<div style="margin-top:2%;">
-    <table style="border-style:solid; border-color:black; width:100%;">
-        @{
-            if (Model != null)
+        <input type="url" name="url" placeholder="Enter URL" required />
+
+        <label labelfor="file path">
+            Count column entries:
+        </label>
+
+        <select class="custom-select" name="column" required>
+            @foreach (DataColumn col in Model.Columns)
             {
-                <thead style="font-weight:bold;">
-                    @for (int i = 0; i < Model.Columns.Count; i++)
-                    {
-                    <td style="text-align:center;">
-                        &nbsp;@Model.Columns[i]
-                    </td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                }
-                    </thead>
+                <option>@col</option>
+            }
+        </select>
+        <div style="padding-top:0.5%;">
+            <label labelfor="sign">sign:</label>
+            <select class="custom-select" name="sign" required>
+                <option>=</option>
+                <option>></option>
+                <option><</option>
+                <option>>=</option>
+                <option><=</option>
+            </select>
 
-
-
-                    foreach (DataRow row in Model.Rows)
-                    {
-                        <tbody>
-                            <tr>
-                                @foreach (DataColumn col in Model.Columns)
-                                {
-
-                                    <td style="text-decoration:underline; text-align:center;">@row[col.ColumnName].ToString()</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                }
-                            </tr>
-                        </tbody>
-                    }
-                }
-        }
-    </table>
+            <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+            <input type="number" name="operand" placeholder="number" required />
+            <!--Box 2.1-->
+            <div style="padding-left:0.5%; display:inline;">
+                <input type="submit" class="btn btn-primary btn-primary" value="Count" />
+            </div>
+            <!--/Box 2.1-->
+        </div>
+    }
 </div>
+            @* /Box 2 *@
+
+            @* Box 3 *@
+<div style="width:36%;" class="card mb-3">
+    @* XML Download *@
+    <h3>Download Table Data:</h3>
+    <!--Box 3.1-->
+    <div style="padding-top:2%;">
+        @using (Html.BeginForm("DownloadXMLFiltered", "Home", FormMethod.Post))
+        {
+
+            <label labelfor="file path">
+                Download Remote CSV as XML:
+            </label>
+
+            <input type="url" name="url" placeholder="Enter URL" required />
+
+            @* Column Selection *@
+            <label labelfor="file path">
+                Column:
+            </label>
+            <select class="custom-select" name="column" required>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <option>@col</option>
+                }
+            </select>
+
+            @* Operation Selection *@
+            <label labelfor="sign">sign:</label>
+            <select class="custom-select" name="sign" required>
+                <option>=</option>
+                <option>></option>
+                <option><</option>
+                <option>>=</option>
+                <option><=</option>
+            </select>
+
+            @*Ref Point*@
+            <label labelfor="refPoint">Reference Point:</label>
+            <input type="number" name="operand" placeholder="number" required />
+
+            @* Sort option *@
+            <label labelfor="SortOrder">Sort Order:</label>
+            <select class="custom-select" name="sortOrder" required>
+                <option selected="">ASC</option>
+                <option>DESC</option>
+            </select>
 
 
-@section scripts{
-    <script>
-        function btn_count_entries() {
-            var e = document.getElementById("countDropdown");
-            var strUser = e.options[e.selectedIndex];
-            alert(strUser.innerHTML);
+            <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+
+
         }
-    </script>
-}
+    </div>
+    <!--/Box 3.1-->
+    @* JSON Download *@
+    <!--Box 3.2-->
+    <div style="padding-top:3%;">
+        @using (Html.BeginForm("DownloadJSONFiltered", "Home", FormMethod.Post))
+        {
+
+            <label padding-top:0.5%;" labelfor="file path">
+                Download Remote CSV as JSON:
+            </label>
+
+            <input type="url" name="url" placeholder="Enter URL" required />
+
+            @* Column Selection *@
+            <label labelfor="file path">
+                Column:
+            </label>
+            <select class="custom-select" name="column" required>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <option>@col</option>
+                }
+            </select>
+
+            @* Operation Selection *@
+            <label labelfor="sign">sign:</label>
+            <select class="custom-select" name="sign" required>
+                <option>=</option>
+                <option>></option>
+                <option><</option>
+                <option>>=</option>
+                <option><=</option>
+            </select>
+
+            @*Ref Point*@
+            <label labelfor="refPoint">Reference Point:</label>
+            <input type="number" name="operand" placeholder="number" required />
+
+            @* Sort option *@
+            <label labelfor="SortOrder">Sort Order:</label>
+            <select class="custom-select" name="sortOrder" required>
+                <option selected="">ASC</option>
+                <option>DESC</option>
+            </select>
+
+
+            <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+
+
+        }
+    </div>
+    <!--/Box 3.2-->
+</div>
+            @* /Box 3 *@
+
+
+
+
+
+            @* Filtered Results table *@
+            <div style="margin-top:2%;">
+                <table style="border-style:solid; border-color:black; width:100%;">
+                    @{
+                        if (Model != null)
+                        {
+                            <thead style="font-weight:bold;">
+                                @for (int i = 0; i < Model.Columns.Count; i++)
+                                {
+                                <td style="text-align:center;">
+                                    &nbsp;@Model.Columns[i]
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            }
+                                </thead>
+
+
+
+                                foreach (DataRow row in Model.Rows)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            @foreach (DataColumn col in Model.Columns)
+                                            {
+
+                                                <td style="text-decoration:underline; text-align:center;">@row[col.ColumnName].ToString()</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                }
+                            }
+                    }
+                </table>
+            </div>
+
+
+            @section scripts{
+                <script>
+                    function btn_count_entries() {
+                        var e = document.getElementById("countDropdown");
+                        var strUser = e.options[e.selectedIndex];
+                        alert(strUser.innerHTML);
+                    }
+                </script>
+            }

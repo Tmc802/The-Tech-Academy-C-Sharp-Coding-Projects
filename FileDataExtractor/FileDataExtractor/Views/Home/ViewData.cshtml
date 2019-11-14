@@ -1,20 +1,22 @@
-﻿@using FileDataExtractor.Models;
-@using System.Data;
+﻿@using System.Data;
 
-
-    <div style="margin-top: 2%;">
-        <h2 style="padding-left:1%;">Filter your data:</h2>
-        @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
-        {
-            <label style="padding-left:1%;" labelfor="file path">
+@* Box 1 *@
+<div style="padding-left:0.5%; width:35%;" class="card mb-3">
+    @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
+    {
+        <div style="padding-bottom:1%;">
+            <!--Box 1.1-->
+            <h2>Filter your data:</h2>
+            <label labelfor="file path">
                 Remote CSV:
             </label>
             <input type="url" name="url" placeholder="Enter URL" required />
 
             @* Column Selection *@
-            <label style="padding-left:1%;" labelfor="file path">
+            <label style="padding-left:0.5%;" labelfor="file path">
                 Column:
             </label>
+
             <select class="custom-select" name="column" required>
                 @foreach (DataColumn col in Model.Columns)
                 {
@@ -23,7 +25,7 @@
             </select>
 
             @* Operation Selection *@
-            <label style="padding-left:1%;" labelfor="sign">sign:</label>
+            <label labelfor="sign">sign:</label>
             <select class="custom-select" name="sign" required>
                 <option>=</option>
                 <option>></option>
@@ -31,91 +33,126 @@
                 <option>>=</option>
                 <option><=</option>
             </select>
+        </div>
+        <!--/Box 1.1-->
 
+
+
+        <!--Box 1.2-->
+        <div style="padding-bottom:1%;">
             @*Ref Point*@
-            <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
+            <label labelfor="refPoint">Reference Point:</label>
             <input type="number" name="operand" placeholder="number" required />
 
             @* Sort option *@
-            <label style="padding-left:1%;" labelfor="SortOrder">Sort Order:</label>
+            <label style="padding-left:0.5%;" labelfor="SortOrder">Sort Order:</label>
             <select class="custom-select" name="sortOrder" required>
                 <option selected="">ASC</option>
                 <option>DESC</option>
             </select>
 
-            <div style="display:inline; margin-left:1%;" id=submitBox>
-                <input type="submit" class="btn btn-primary btn-primary" value="Filter" />
-                <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile", "Home")'" value="Start Over" />
-            </div>
+            <input type="submit" class="btn btn-primary btn-primary" value="Filter" id=submitBox />
+            <input type="button" class="btn btn-primary btn-primary" onclick="location.href='@Url.Action("ChooseFile", "Home")'" value="Start Over" />
+        </div>
+        <!-- /Box 1.2-->
 
-            <div style="padding-left:1%;">
-                @* Row count *@
-                @{
-                    int RowCount = Model.Rows.Count;
-                    int ColumnCount = Model.Columns.Count;
-                }
+    }
+</div>
+@* /Box 1 *@
 
-                <h3 style="display:inline; margin-left:2%; font-weight:bold;">
-                    <p># of Columns: @ColumnCount</p>
-                    <p># of rows: @RowCount</p>
-                </h3>
-            </div>
-        }
 
-            @* XML Download *@
+@* Box 2 *@
+@* Row count *@
+<div style="padding-left:0.5%; padding-bottom:1%; width:35%;" class="card mb-3">
+    @using (Html.BeginForm("CountColumnData", "Home", FormMethod.Post))
+    {
+        <h3>Count Column Data:</h3>
+        <label labelfor="file path">
+            Remote CSV:
+        </label>
 
-            @using (Html.BeginForm("DownloadXML", "Home", FormMethod.Post))
+        <input type="url" name="url" placeholder="Enter URL" required />
+
+        <label style="padding-left:0.5%;" labelfor="file path">
+            Count column entries:
+        </label>
+
+        <select class="custom-select" name="column" required>
+            @foreach (DataColumn col in Model.Columns)
             {
-
-                <label style="padding-left:1%;" labelfor="file path">
-                    Download Remote CSV as XML:
-                </label>
-
-                <input type="url" name="url" placeholder="Enter URL" required />
-
-                <div style="display:inline; margin-left:1%;" id=submitBox>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                </div>
-
+                <option>@col</option>
             }
+        </select>
 
-            @* JSON Download *@
+        <input type="submit" class="btn btn-primary btn-primary" value="Count" />
+    }
+</div>
+@* /Box 2 *@
 
-            @using (Html.BeginForm("DownloadJSON", "Home", FormMethod.Post))
-            {
 
-                <label style="padding-left:1%; padding-top:0.5%;" labelfor="file path">
-                    Download Remote CSV as JSON:
-                </label>
+@* Box 3 *@
 
-                <input type="url" name="url" placeholder="Enter URL" required />
+<div style="padding-left:0.5%; width:35%;" class="card mb-3">
+    @* XML Download *@
+    <h3>Download Table Data:</h3>
+    @using (Html.BeginForm("DownloadXML", "Home", FormMethod.Post))
+    {
+        <!--Box 3.1-->
+        <div style="padding-bottom:1%;">
+            <label labelfor="XML">
+                Download Remote CSV as XML:
+            </label>
 
-                <div style="display:inline; margin-left:1%;" id=submitBox>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                </div>
+            <input type="url" name="url" placeholder="Enter URL" required />
 
-            }
+            <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+        </div>
+        <!--/Box 3.1-->
+    }
 
-            @* RAW DATA Download *@
+    @* JSON Download *@
 
-            @using (Html.BeginForm("DownloadRawData", "Home", FormMethod.Post))
-            {
+    @using (Html.BeginForm("DownloadJSON", "Home", FormMethod.Post))
+    {
+        <!--Box 3.2-->
+        <div style="padding-bottom:1%;">
+            <label labelfor="JSON">
+                Download Remote CSV as JSON:
+            </label>
 
-                <label style="padding-left:1%; padding-top:0.5%;" labelfor="file path">
-                    Download Remote CSV raw data:
-                </label>
+            <input type="url" name="url" placeholder="Enter URL" required />
 
-                <input type="url" name="url" placeholder="Enter URL" required />
+            <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+        </div>
+        <!--/Box 3.2-->
+    }
 
-                <div style="display:inline; margin-left:1%;" id=submitBox>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                </div>
-            }
-    </div>
+    @* RAW DATA Download *@
+
+    @using (Html.BeginForm("DownloadRawData", "Home", FormMethod.Post))
+    {
+        <!--Box 3.3-->
+        <div style="padding-bottom:1%;">
+            <label padding-top:0.5%;" labelfor="file path">
+                Download Remote CSV raw data:
+            </label>
+
+            <input type="url" name="url" placeholder="Enter URL" required />
+
+            <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+        </div>
+        <!--Box 3.3-->
+    }
+</div>
+@* /Box 3 *@
+
+
+
+
 
 @* Full Results table *@
 <div style="margin-top:1%;">
-    <table style="border-style:solid; border-color:black; width:100%;">
+    <table style="border-style:solid; border-color:black;">
         @{
             if (Model != null)
             {
