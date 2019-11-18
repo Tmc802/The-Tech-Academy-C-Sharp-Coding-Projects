@@ -142,13 +142,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConvertToJSON.cs" />
-    <Compile Include="Models\ConvertToXML.cs" />
-    <Compile Include="Models\CountColumnData.cs" />
     <Compile Include="Models\DownloadFile.cs" />
+    <Compile Include="Models\CountColumnData.cs" />
     <Compile Include="Models\FilteredDT.cs" />
-    <Compile Include="Models\GetCSVFile.cs" />
-    <Compile Include="Models\RawData.cs" />
+    <Compile Include="Models\RemoteFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,8 +230,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FilteredDataView.cshtml" />
     <Content Include="Views\Home\CountColumnData.cshtml" />
-    <Content Include="Views\Home\CountColumnDataFiltered.cshtml" />
-    <Content Include="Views\Home\modaltest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

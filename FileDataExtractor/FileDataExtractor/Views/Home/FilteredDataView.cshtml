@@ -1,22 +1,27 @@
 ﻿@using System.Data;
 
-    <div style="margin-top:2%; padding-left:0.5%;">
-        @* Modal button *@
-        <button id="btnShowModal" typeof="button" class="btn btn-outline-primary" data-target="#siftData" data-toggle="modal">Sift Data</button>
-        @* /Modal button *@
+@{
+    //DataTable stored in session
+    Session.Add("dt", Model);
+}
 
-        @* Count rows button *@
-        <button id="RowCount" typeof="button" class="btn btn-outline-primary" data-target="#countColRows" data-toggle="modal">Count Column Data</button>
-        @* /Count rows button *@
+<div style="margin-top:2%; padding-left:0.5%;">
+    @* Modal button *@
+    <button id="btnShowModal" typeof="button" class="btn btn-outline-primary" data-target="#filterData" data-toggle="modal">Filter Data</button>
+    @* /Modal button *@
 
-        @* Extract Data button *@
-        <button id="ExtractData" typeof="button" class="btn btn-outline-primary" data-target="#download" data-toggle="modal">Extract Data</button>
-        @* /Extract Data button *@
+    @* Count rows button *@
+    <button id="RowCount" typeof="button" class="btn btn-outline-primary" data-target="#countColRows" data-toggle="modal">Count Column Data</button>
+    @* /Count rows button *@
 
-        @*Start over btn*@
-        <input type="button" class="btn btn-primary btn-outline-danger" onclick="location.href='@Url.Action("Index", "Home")'" value="Start Over" />
-        @*/Start over btn*@
-    </div>
+    @* Extract Data button *@
+    <button id="ExtractData" typeof="button" class="btn btn-outline-primary" data-target="#download" data-toggle="modal">Extract Data</button>
+    @* /Extract Data button *@
+
+    @*Start over btn*@
+    <input type="button" class="btn btn-primary btn-outline-danger" onclick="location.href='@Url.Action("Index", "Home")'" value="Start Over" />
+    @*/Start over btn*@
+</div>
 
 
 
@@ -28,13 +33,13 @@
         @{
             if (Model != null)
             {
-                    <thead>
-                        @for (int i = 0; i < Model.Columns.Count; i++)
-                        {
-                            <th style="text-align:center" class="table-active" scope="col">
-                                &nbsp;@Model.Columns[i]
-                            </th>
-                        }
+                <thead>
+                    @for (int i = 0; i < Model.Columns.Count; i++)
+                    {
+                    <th style="text-align:center" class="table-active" scope="col">
+                        &nbsp;@Model.Columns[i]
+                    </th>
+                }
                     </thead>
 
                     foreach (DataRow row in Model.Rows)
@@ -48,21 +53,21 @@
                                 }
                             </tr>
                         </tbody>
-                        }
                     }
-            }   
+                }
+        }
     </table>
 </div>
 
 
 @* Modal's *@
-@*Sift Data*@
-<div class="modal" id="siftData" tabindex="-1" role="dialog" aria-labelledby="Sift Data">
+@*Filter Data*@
+<div class="modal" id="filterData" tabindex="-1" role="dialog" aria-labelledby="Filter Data">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Sift Data</h5>
+                <h5 class="modal-title">filter Data</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -82,71 +87,71 @@
                     </div>
 
 
-                        <div>
-                            @* Column Selection *@
-                            <label labelfor="file path">
-                                Column:
-                            </label>
+                    <div>
+                        @* Column Selection *@
+                        <label labelfor="file path">
+                            Column:
+                        </label>
 
 
 
-                            <div style="display:inline;">
-                                <select class="custom-select float-right" name="column" required>
-                                    @foreach (DataColumn col in Model.Columns)
-                                    {
-                                        <option>@col</option>
-                                    }
-                                </select>
-                            </div>
+                        <div style="display:inline;">
+                            <select class="custom-select float-right" name="column" required>
+                                @foreach (DataColumn col in Model.Columns)
+                                {
+                                    <option>@col</option>
+                                }
+                            </select>
                         </div>
-
-
-
-                        @* Operation Selection *@
-
-            <div style="padding-top:1%; padding-bottom:1.5%;">
-                <label style="display:inline;" labelfor="sign">sign:</label>
-
-                <div class="float-right" style="display:inline; width:30%;">
-                    <select class="custom-select" name="sign" required>
-                        <option>=</option>
-                        <option>></option>
-                        <option><</option>
-                        <option>>=</option>
-                        <option><=</option>
-                    </select>
-                </div>
-            </div>
-
-
-
-
-                        <div style="padding-top:1%;">
-                            @*Ref Point*@
-                            <label labelfor="refPoint">Reference Point:</label>
-                            <div style="display:inline;" class="float-right">
-                                <input type="number" name="operand" placeholder="number" required />
-                            </div>
-                        </div>
-
-
-                        @* Sort option *@
-                        <div>
-                            <label labelfor="SortOrder">Sort:</label>
-                            <div style="display:inline;">
-                                <select class="custom-select float-right" name="sortOrder" required>
-                                    <option selected="">ASC</option>
-                                    <option>DESC</option>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-primary btn-primary" value="Filter" id=submitBox />
-
-                        <!-- /Box 1.2-->
-                        }
-
                     </div>
-                </div>
+
+
+
+                    @* Operation Selection *@
+
+                    <div style="padding-top:1%; padding-bottom:1.5%;">
+                        <label style="display:inline;" labelfor="sign">sign:</label>
+
+                        <div class="float-right" style="display:inline; width:30%;">
+                            <select class="custom-select" name="sign" required>
+                                <option>=</option>
+                                <option>></option>
+                                <option><</option>
+                                <option>>=</option>
+                                <option><=</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+                    <div style="padding-top:1%;">
+                        @*Ref Point*@
+                        <label labelfor="refPoint">Reference Point:</label>
+                        <div style="display:inline;" class="float-right">
+                            <input type="number" name="operand" placeholder="number" required />
+                        </div>
+                    </div>
+
+
+                    @* Sort option *@
+                    <div>
+                        <label labelfor="SortOrder">Sort:</label>
+                        <div style="display:inline;">
+                            <select class="custom-select float-right" name="sortOrder" required>
+                                <option selected="">ASC</option>
+                                <option>DESC</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-primary" value="Filter" id=submitBox />
+
+                    <!-- /Box 1.2-->
+                }
+
+            </div>
+        </div>
     </div>
 </div>
 
@@ -164,13 +169,9 @@
             </div>
 
             <div class="modal-body">
-                @using (Html.BeginForm("CountColumnDataFiltered", "Home", FormMethod.Post))
+                @using (Html.BeginForm("CountColumnData", "Home", FormMethod.Post))
                 {
-                    <label padding-top:0.5%;" labelfor="file path">
-                        Remote CSV:
-                    </label>
-
-                    <input type="url" name="url" value="https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD" required />
+   
                     <div>
                         <label labelfor="file path">
                             Count column entries:
@@ -184,25 +185,11 @@
                         </select>
                     </div>
 
-                    <div style="padding-top:0.5%;">
-                        <label labelfor="sign">sign:</label>
-                        <select class="custom-select" name="sign" required>
-                            <option>=</option>
-                            <option>></option>
-                            <option><</option>
-                            <option>>=</option>
-                            <option><=</option>
-                        </select>
-                        <div>
-                            <label style="padding-left:1%;" labelfor="refPoint">Reference Point:</label>
-                            <input type="number" name="operand" placeholder="number" required />
-                        </div>
-                        <!--Box 2.1-->
+                    
                         <div style="padding-left:0.5%; display:inline;">
                             <input type="submit" class="btn btn-primary btn-primary" value="Count" />
                         </div>
-                        <!--/Box 2.1-->
-                    </div>
+                        
                 }
 
             </div>
@@ -225,117 +212,49 @@
             </div>
 
             <div class="modal-body">
-                @using (Html.BeginForm("DownloadXMLFiltered", "Home", FormMethod.Post))
+                @using (Html.BeginForm("DownloadXML", "Home", FormMethod.Post))
                 {
-                <div>
-                    <label labelfor="file path">
-                        Download CSV as XML:
-                    </label>
+                    <!--Box 3.1-->
+                    <div style="padding-bottom:1%;">
+                        <label labelfor="XML">
+                            Download CSV as XML:
+                        </label>
 
-                    <input type="url" name="url" value="https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD" required />
-                </div>
-                    @* Column Selection *@
-            <div>
-                <label labelfor="file path">
-                    Column:
-                </label>
-                <select class="custom-select" name="column" required>
-                    @foreach (DataColumn col in Model.Columns)
-                    {
-                        <option>@col</option>
-                    }
-                </select>
-            </div>
-
-                    @* Operation Selection *@
-            <div>
-                <label labelfor="sign">sign:</label>
-                <select class="custom-select" name="sign" required>
-                    <option>=</option>
-                    <option>></option>
-                    <option><</option>
-                    <option>>=</option>
-                    <option><=</option>
-                </select>
-            </div>
-
-            <div>
-                @*Ref Point*@
-                <label labelfor="refPoint">Reference Point:</label>
-                <input type="number" name="operand" placeholder="number" required />
-            </div>
-                    @* Sort option *@
-            <div>
-                <label labelfor="SortOrder">Sort Order:</label>
-                <select class="custom-select" name="sortOrder" required>
-                    <option selected="">ASC</option>
-                    <option>DESC</option>
-                </select>
-            </div>
-
-
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-
-
+                        <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+                    </div>
+                    <!--/Box 3.1-->
                 }
-            </div>
-            <!--/Box 3.1-->
-            @* JSON Download *@
-            <!--Box 3.2-->
-            <div style="padding-top:3%;">
-                @using (Html.BeginForm("DownloadJSONFiltered", "Home", FormMethod.Post))
+
+                @* JSON Download *@
+
+                @using (Html.BeginForm("DownloadJSON", "Home", FormMethod.Post))
                 {
-                <div>
-                    <label padding-top:0.5%;" labelfor="file path">
-                        Download CSV as JSON:
-                    </label>
+                    <!--Box 3.2-->
+                    <div style="padding-bottom:1%;">
+                        <label labelfor="JSON">
+                            Download CSV as JSON:
+                        </label>
 
-                    <input type="url" name="url" value="https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD" required />
-                </div>
-                    @* Column Selection *@
-            <div>
-                <label labelfor="file path">
-                    Column:
-                </label>
-                <select class="custom-select" name="column" required>
-                    @foreach (DataColumn col in Model.Columns)
-                    {
-                        <option>@col</option>
-                    }
-                </select>
-            </div>
+                        <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+                    </div>
+                    <!--/Box 3.2-->
+                }
 
-                    @* Operation Selection *@
-            <div>
-                <label labelfor="sign">sign:</label>
-                <select class="custom-select" name="sign" required>
-                    <option>=</option>
-                    <option>></option>
-                    <option><</option>
-                    <option>>=</option>
-                    <option><=</option>
-                </select>
-            </div>
+                @* RAW DATA Download *@
 
-                    @*Ref Point*@
-            <div>
-                <label labelfor="refPoint">Reference Point:</label>
-                <input type="number" name="operand" placeholder="number" required />
-            </div>
+                @using (Html.BeginForm("DownloadRawData", "Home", FormMethod.Post))
+                {
+                    <!--Box 3.3-->
+                    <div style="padding-bottom:1%;">
+                        <label padding-top:0.5%;" labelfor="file path">
+                            Download CSV raw data:
+                        </label>
 
-                    @* Sort option *@
-            <div>
-                <label labelfor="SortOrder">Sort Order:</label>
-                <select class="custom-select" name="sortOrder" required>
-                    <option selected="">ASC</option>
-                    <option>DESC</option>
-                </select>
-            </div>
+                        <input type="submit" class="btn btn-primary btn-primary" value="Download" />
+                    </div>
+                    <!--Box 3.3-->
+                }
 
-                    <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-  
-                <!--/Box 3.2-->
-            }
             </div>
         </div>
     </div>
