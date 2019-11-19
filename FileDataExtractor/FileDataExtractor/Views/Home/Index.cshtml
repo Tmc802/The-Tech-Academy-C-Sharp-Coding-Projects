@@ -1,11 +1,21 @@
-﻿<div>
-    <div style="text-align:center; margin-left:20%; margin-top:10%;" class="container">
-        <h1 class="text-primary">Data Miner</h1>
-            <div class="card-body">
-                <p style="font-size:120%; width: 55%; margin-left: 23%; margin-top: 3%;">Please click "Get Mining" button below in order to choose your file, extract the data, and view it. Options will be provided after parsing to choose your prefered method of download.</p>
+﻿<div class="container text-center">
+    <div class="container" style="text-align:center; margin-top:25% !important; margin:0%;">
 
-                <div style="text-align:center; margin-top:3%;">
-                    <input type="button" class="btn btn-primary btn-lg btn-outline-primary hvr-grow" style="font-size:200%;" onclick="location.href='@Url.Action("ChooseFile","Home")'" value="Get Mining">
+        @* Data Miner header *@
+        <h1 class="text-primary hvr-grow" style="padding-bottom:1.5%;">
+            Data Miner
+        </h1>
+
+        @* Text body *@
+            <div class="card-body">
+                <p style="font-size:120%; padding-bottom:1%; width:50%; margin-left:25%;">
+                Please click "Choose File" to start the program. Choose your file, upload the data, and then view it. 
+                Options will be provided after parsing to choose your prefered method of download.
+                </p>
+
+                @* Choose File Button *@
+                <div style="padding-top:1%;">
+                    <input type="button" class="btn btn-primary btn-lg btn-outline-primary hvr-grow" style="font-size:200%;" onclick="location.href='@Url.Action("ChooseFile","Home")'" value="Choose File">
                 </div>
             </div>
     </div>

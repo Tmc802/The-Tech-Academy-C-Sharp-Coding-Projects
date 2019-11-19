@@ -1,16 +1,17 @@
 ﻿using System.Web.Mvc;
-using FileDataExtractor.Models;
+using DataMiner.Models;
 using System.IO;
 using System.Data;
 using System.Web;
 
-namespace FileDataExtractor.Controllers
+namespace DataMiner.Controllers
 {
     public class HomeController : Controller
     {
 
         public ActionResult Index()
         {
+            Session.Clear();
             return View();
         }
 
@@ -20,9 +21,11 @@ namespace FileDataExtractor.Controllers
         }
 
         [ActionName("ViewData")]
-        //[RequireRouteValuesAttribute(new[] {"url"})]
-        public ActionResult ViewData(string url)
+        public ActionResult viewData(string url)
         {
+            if (url == null)
+            url = Session["url"] as string;
+
             //DataTable stored in session
             Session.Add("url", url);
             
@@ -36,20 +39,18 @@ namespace FileDataExtractor.Controllers
             Session.Add("dt", Model);
             Session.Add("FullDT", Model);
 
-
             return View("ViewData");
         }
 
         //ViewData override for filtered data
         [ActionName("FilterData")]
-        //[RequireRouteValuesAttribute(new[] { "column", "sign", "operand", "sortOrder" })]
-        public ActionResult ViewData(string column, string sign, int operand, string sortOrder)
+        public ActionResult viewData(string column, string sign, double operand, string sortOrder)
         {
 
             //call DataTable stored in session
             var dt = Session["FullDT"] as DataTable;
 
-            FilteredDT dtSorted = new FilteredDT();
+            Filters dtSorted = new Filters();
             
             DataTable Model = dtSorted.FilterData(column, sign, operand, sortOrder, dt);
 
@@ -61,30 +62,6 @@ namespace FileDataExtractor.Controllers
             return View("ViewData");
 
         }
-
-        // Filter controller calls
-        public ActionResult CountColumnData(string column)
-        {
-
-            var dt = Session["dt"] as DataTable;
-
-            CountColumnData columnDataCount = new CountColumnData();
-            var response = columnDataCount.countData(column, dt);
-
-            //Session.Remove("dt");
-            ViewBag.response = response;
-
-            return View();
-        }
-
-        //public ActionResult FilteredDataView(string column, string sign, int operand, string url, string sortOrder)
-        //{
-        //    var dt = Session["dt"] as DataTable;
-
-        //    FilteredDT dtSorted = new FilteredDT();
-
-        //    return View(dtSorted.FilterData(column, sign, operand, sortOrder, dt));
-        //}
 
 
         // Download Controller Calls

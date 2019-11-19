@@ -4,20 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace FileDataExtractor.Models
+namespace DataMiner.Models
 {
     public class RemoteFile
     {
 
         public StreamReader GetCSV(string url)
         {
-            
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url); // web request
             HttpWebResponse resp = (HttpWebResponse)req.GetResponse(); // get response
             // check for content type here
             if(resp.ContentType != "text/csv; charset=utf-8")
             {
-                throw new System.Exception("File is of type '.csv' Please only upload csv files to this program.");
+                throw new System.Exception("File is not of type 'text/csv; charset=utf-8.' Please only upload csv files to this program.");
             }
             StreamReader sr = new StreamReader(resp.GetResponseStream()); // response stream? 
 
@@ -33,7 +32,7 @@ namespace FileDataExtractor.Models
             while (!sr.EndOfStream)
             {
                 string fullText = sr.ReadToEnd(); // read full file text
-                string[] rows = fullText.Split('\n'); // split full file text into
+                string[] rows = fullText.Split('\n'); // split full file text
 
                 for (int i = 0; i < rows.Count() - 1; i++)
                 {
@@ -41,9 +40,9 @@ namespace FileDataExtractor.Models
                     {
                         if (i == 0)
                         {
-                            for (int j = 0; j < rowValues.Count(); j++)
+                            for (int j = 0; j < rowValues.Count(); j++) // add the row values to each column
                             {
-                                dtCsv.Columns.Add(rowValues[j],typeof(Double)); // add headers
+                                dtCsv.Columns.Add(rowValues[j], typeof(double)); // add headers and specify their type.
                             }
                         }
                         else
@@ -51,20 +50,17 @@ namespace FileDataExtractor.Models
                             DataRow dr = dtCsv.NewRow();
                             for (int k = 0; k < rowValues.Count(); k++)
                             {
-                                /*var rowV =*/
-                                /* Needs .ToString(); */
                                 dr[k] = rowValues[k];
-
-                                //dr[k] = Convert.ToDouble(rowV);
                             }
                             dtCsv.Rows.Add(dr); //add other rows
                         }
                     }
                 }
             }
-
             return dtCsv;
-            //make parse seperate function
         }
+
+
+
     }
 }

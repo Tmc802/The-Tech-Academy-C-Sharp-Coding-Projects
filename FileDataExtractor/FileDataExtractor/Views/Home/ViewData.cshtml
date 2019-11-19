@@ -1,25 +1,40 @@
 ﻿@using System.Data;
 
-@{ 
+@{
     var Model = Session["dt"] as DataTable;
 }
 
-<div style="margin-top:2%; padding-left:0.5%;">
+<div style="margin-top:2%; padding-left:0.5%; text-align:center;">
+    @* Show all data *@
+
+    <div style="display:inline; padding-right:5%;">
+        <input type="submit" class="btn btn-outline-primary" value="All Data" onclick="location.href='@Url.Action("ViewData", "Home")'" id=submitBox />
+    </div>
+
+    @* /Show all data *@
 
     @* Modal button *@
-    <button id="btnShowModal" typeof="button" class="btn btn-outline-primary" data-target="#filterData" data-toggle="modal">Filter Data</button>
+    <div style="display:inline; padding-right:5%;">
+        <button id="btnShowModal" typeof="button" class="btn btn-outline-primary" data-target="#filterData" data-toggle="modal">Filter Data</button>
+    </div>
     @* /Modal button *@
 
     @* Count rows button *@
-    <button id="RowCount" typeof="button" class="btn btn-outline-primary" data-target="#countColRows" data-toggle="modal">Count Column Data</button>
+    <div style="display:inline; padding-right:5%;">
+        <button id="RowCount" typeof="button" class="btn btn-outline-primary" data-target="#Count" data-toggle="modal">Data Count</button>
+    </div>
     @* /Count rows button *@
 
-    @* Extract Data button *@
-    <button id="ExtractData" typeof="button" class="btn btn-outline-primary" data-target="#download" data-toggle="modal">Extract Data</button>
-    @* /Extract Data button *@
+    @* Download button *@
+    <div style="display:inline; padding-right:5%;">
+        <button id="Download" typeof="button" class="btn btn-outline-primary" data-target="#download" data-toggle="modal">Download</button>
+    </div>
+    @* /Download button *@
 
     @*Start over btn*@
-    <input type="button" class="btn btn-primary btn-outline-danger" onclick="location.href='@Url.Action("Index", "Home")'" value="Start Over" />
+    <div style="display:inline;">
+        <input type="button" class="btn btn-primary btn-outline-danger" onclick="location.href='@Url.Action("Index", "Home")'" value="Start Over" />
+    </div>
     @*/Start over btn*@
 
 </div>
@@ -32,19 +47,22 @@
 
 @* Full Results table *@
 <div style="margin-top:2%;">
-    <table class="table table-hover" style="border-style:solid; border-color:black; width:100%;">
+    <table id="dt" class="table table-hover" style="border-style:solid; border-color:black; width:100%;">
 
         @{
+
             if (Model != null)
             {
                 <thead>
                     @for (int i = 0; i < Model.Columns.Count; i++)
                     {
+
                     <th style="text-align:center" class="table-active" scope="col">
                         @Model.Columns[i]
                     </th>
 
-                }
+
+                    }
                     </thead>
 
 
@@ -55,8 +73,8 @@
                             <tr scope="row">
                                 @foreach (DataColumn col in Model.Columns)
                                 {
-
                                     <td>@row[col.ColumnName].ToString()</td>
+
                                 }
                             </tr>
                         </tbody>
@@ -100,79 +118,124 @@
                 {
 
                     <!--Box 1.1-->
-                    <div>
-                        @* Column Selection *@
+                <div>
+                    @* Top row labels *@
+                    <div style="display:inline;">
                         <label labelfor="file path">
                             Column:
                         </label>
+                    </div>
 
-                        <div style="display:inline;">
-                            <select class="custom-select float-right" name="column" required>
-                                @foreach (DataColumn col in Model.Columns)
-                                {
-                                    <option>@col</option>
-                                }
-                            </select>
-                        </div>
+                    <div class="float-right" style="display:inline; width:53%;">
+                        <label labelfor="sign">sign:</label>
+                    </div>
+
+                    @* Top row dropdowns *@
+                    <div style="display:inline;">
+                        <select class="custom-select" name="column" required>
+                            @foreach (DataColumn col in Model.Columns)
+                            {
+                                <option>@col</option>
+                            }
+                        </select>
+                    </div>
+                    <div style="display:inline; padding-left:1%;">
+                        <select class="custom-select" name="Sign" required>
+                            <option>=</option>
+                            <option>></option>
+                            <option><</option>
+                            <option>>=</option>
+                            <option><=</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+                    @* 2nd row labels *@
+
+            <div>
+
+                @* Sort order label *@
+                <div class="float-right" style="display:inline; width:53%;">
+                    <label labelfor="SortOrder">
+                        Sort:
+                    </label>
+                </div>
+
+                @*Ref Point*@
+                <div style="display:inline;">
+                    <label labelfor="refPoint">
+                        Reference Point:
+                    </label>
+                </div>
+
+                @* 2nd row operations *@
+
+                @* reference point *@
+      
+                    <div style="display:inline;">
+                        <input style="width:45%;" type="search" step="any" name="operand" placeholder="number" required />
                     </div>
 
 
+                @* sort order operation *@
+            <div style="display:inline; padding-left:1%;">
+                <select class="custom-select" name="sortOrder" required>
+                    <option selected="">ASC</option>
+                    <option>DESC</option>
+                </select>
+                </div>
 
-                    @* Operation Selection *@
 
-                    <div style="padding-top:1%; padding-bottom:1.5%;">
-                        <label style="display:inline;" labelfor="sign">sign:</label>
+            </div>
 
-                        <div class="float-right" style="display:inline; width:30%;">
-                            <select class="custom-select" name="sign" required>
-                                <option>=</option>
-                                <option>></option>
-                                <option><</option>
-                                <option>>=</option>
-                                <option><=</option>
-                            </select>
-                        </div>
+                    <div style="padding-top:2%;">
+                        <input type="submit" class="btn btn-primary btn-outline-primary" value="Filter" id=submitBox />
                     </div>
-
-
-
-
-                    <div style="padding-top:1%;">
-                        @*Ref Point*@
-                        <label labelfor="refPoint">Reference Point:</label>
-                        <div style="display:inline;" class="float-right">
-                            <input type="number" name="operand" placeholder="number" required />
-                        </div>
-                    </div>
-
-
-                    @* Sort option *@
-                    <div>
-                        <label labelfor="SortOrder">Sort:</label>
-                        <div style="display:inline;">
-                            <select class="custom-select float-right" name="sortOrder" required>
-                                <option selected="">ASC</option>
-                                <option>DESC</option>
-                            </select>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-primary" value="Filter" id=submitBox />
-
-                    <!-- /Box 1.2-->
                 }
-
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @*Count col rows*@
-<div class="modal" id="countColRows" tabindex="-1" role="dialog" aria-labelledby="Count Rows">
+<div class="modal" id="Count" tabindex="-1" role="dialog" aria-labelledby="Data Count">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Count Column Data</h5>
+                <h5 class="modal-title">Data Count</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -180,28 +243,15 @@
             </div>
 
             <div class="modal-body">
-                @using (Html.BeginForm("CountColumnData", "Home", FormMethod.Post))
-                {
-                    <label labelfor="file path">
-                        Remote CSV:
-                    </label>
+                <div style="text-align:center; margin-top:1%;">
+                    @* Total Row count *@
+                    <div>@Model.Rows.Count total rows in this table</div>
+                    @* /Total Row Count *@
 
-                    <input type="url" name="url" value="https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD" required />
-
-                    <label style="padding-left:0.5%;" labelfor="file path">
-                        Count column entries:
-                    </label>
-
-                    <select class="custom-select" name="column" required>
-                        @foreach (DataColumn col in Model.Columns)
-                        {
-                            <option>@col</option>
-                        }
-                    </select>
-
-                    <input type="submit" class="btn btn-primary btn-primary" value="Count" />
-                }
-
+                    @* Total Column count *@
+                    <div>@Model.Columns.Count total columns in this table</div>
+                    @* /Total Column Count *@
+                </div>
             </div>
         </div>
     </div>
@@ -222,52 +272,72 @@
             </div>
 
             <div class="modal-body">
-                @using (Html.BeginForm("DownloadXML", "Home", FormMethod.Post))
-                {
-                    <!--Box 3.1-->
-                    <div style="padding-bottom:1%;">
-                        <label labelfor="XML">
-                            Download CSV as XML:
-                        </label>
+                <div>
+                    @using (Html.BeginForm("DownloadXML", "Home", FormMethod.Post))
+                    {
+                        <!--Box 3.1-->
+                        <div style="padding-bottom:2%;">
+                            @*<label labelfor="XML">
+                                Download CSV as XML:
+                            </label>*@
+                            <div>
+                                <input type="submit" class="btn btn-primary btn-outline-primary text-center" style="width:100%;" value="Download as XML" />
+                            </div>
+                        </div>
+                        <!--/Box 3.1-->
+                    }
 
-                        <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                    </div>
-                    <!--/Box 3.1-->
-                }
+                    @* JSON Download *@
 
-                @* JSON Download *@
+                    @using (Html.BeginForm("DownloadJSON", "Home", FormMethod.Post))
+                    {
 
-                @using (Html.BeginForm("DownloadJSON", "Home", FormMethod.Post))
-                {
-                    <!--Box 3.2-->
-                    <div style="padding-bottom:1%;">
-                        <label labelfor="JSON">
-                            Download CSV as JSON:
-                        </label>
+                        <!--Box 3.2-->
+                        <div style="padding-bottom:2%;">
+                            @*<label labelfor="JSON">
+                                Download CSV as JSON:
+                            </label>*@
+                            <div>
+                                <input type="submit" class="btn btn-primary btn-outline-primary text-center" style="width:100%;" value="Download as JSON" />
+                            </div>
+                        </div>
 
-                        <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                    </div>
-                    <!--/Box 3.2-->
-                }
+                    }
 
-                @* RAW DATA Download *@
+                    @* RAW DATA Download *@
 
-                @using (Html.BeginForm("DownloadRawData", "Home", FormMethod.Post))
-                {
-                    <!--Box 3.3-->
-                    <div style="padding-bottom:1%;">
-                        <label padding-top:0.5%;" labelfor="file path">
-                            Download CSV raw data:
-                        </label>
+                    @using (Html.BeginForm("DownloadRawData", "Home", FormMethod.Post))
+                    {
 
-                        <input type="submit" class="btn btn-primary btn-primary" value="Download" />
-                    </div>
-                    <!--Box 3.3-->
-                }
+                        <div style="padding-bottom:2%;">
+                            @*<label padding-top:0.5%;" labelfor="file path">
+                                Download CSV raw data:
+                            </label>*@
+                            <div>
+                                <input type="submit" class="btn btn-primary btn-outline-primary text-center" style="width:100%;" value="Download Raw Data" />
+                            </div>
+                        </div>
 
+
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 @* /Modal *@
+
+
+@section scripts{
+    <script>
+        function displayCount() {
+            var count = document.getElementById("displayCount");
+            lTable.style.display = (lTable.style.display == "rowCount") ? "none" : "table";
+            var rowCount = $('#dt tr').length;
+        }
+    </script>
+}
+
+
+

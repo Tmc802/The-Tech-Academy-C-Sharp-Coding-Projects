@@ -143,10 +143,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DownloadFile.cs" />
-    <Compile Include="Models\CountColumnData.cs" />
-    <Compile Include="Models\FilteredDT.cs" />
+    <Compile Include="Models\Filters.cs" />
     <Compile Include="Models\RemoteFile.cs" />
-    <Compile Include="Models\RequireRouteValuesAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -229,7 +227,6 @@
     <Content Include="Views\Home\ChooseFile.cshtml" />
     <Content Include="Views\Home\ViewData.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\CountColumnData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
-using FileDataExtractor.Models;
+using DataMiner.Models;
 
-namespace FileDataExtractor.Models
+namespace DataMiner.Models
 {
     public class DownloadFile
     {
@@ -42,7 +42,7 @@ namespace FileDataExtractor.Models
             response.AddHeader("content-disposition", "attachment; filename=" + fileName);
             response.AddHeader("Content-Transfer-Encoding", "binary");
             response.ContentType = "application-download";
-            response.Write(ds.GetXml());
+            response.Write(ds.GetXml().Replace("_x0020", ""));
 
             ds.Tables.Remove(dt); // remove the datatable after the file was created for download
         }
