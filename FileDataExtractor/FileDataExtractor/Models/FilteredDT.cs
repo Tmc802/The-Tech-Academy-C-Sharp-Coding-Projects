@@ -5,7 +5,7 @@ namespace FileDataExtractor.Models
 {
     public class FilteredDT
     {
-        public DataTable FilterData(string column, string sign, int operand, string url, string sortOrder, DataTable dt)
+        public DataTable FilterData(string column, string sign, int operand, string sortOrder, DataTable dt)
         {
             DataTable filtDataTable = new DataTable();
 
@@ -13,7 +13,7 @@ namespace FileDataExtractor.Models
             {
                 filtDataTable.Columns.Add(col.ColumnName, col.DataType);
             }
-            string expression = "[" + column + "]" + sign + operand;
+            string expression = "[" + column + "]" + " " + sign + " " + operand;
 
             DataRow[] foundRows;
 

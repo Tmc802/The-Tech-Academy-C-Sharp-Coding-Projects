@@ -1,8 +1,7 @@
 ﻿@using System.Data;
 
-@{
-    //DataTable stored in session
-    Session.Add("dt", Model);
+@{ 
+    var Model = Session["dt"] as DataTable;
 }
 
 <div style="margin-top:2%; padding-left:0.5%;">
@@ -97,18 +96,10 @@
             </div>
 
             <div class="modal-body">
-                @using (Html.BeginForm("FilteredDataView", "Home", FormMethod.Post))
+                @using (Html.BeginForm("FilterData", "Home", FormMethod.Post))
                 {
 
                     <!--Box 1.1-->
-                    <label labelfor="file path">
-                        Remote CSV:
-                    </label>
-                    <div style="display:inline;" class="float-right">
-                        <input type="url" name="url" value="https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.csv?accessType=DOWNLOAD" required />
-                    </div>
-
-
                     <div>
                         @* Column Selection *@
                         <label labelfor="file path">

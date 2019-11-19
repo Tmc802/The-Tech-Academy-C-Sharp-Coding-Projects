@@ -2,9 +2,7 @@
 using FileDataExtractor.Models;
 using System.IO;
 using System.Data;
-using System.Net;
 using System.Web;
-using System.Collections.Generic;
 
 namespace FileDataExtractor.Controllers
 {
@@ -21,17 +19,47 @@ namespace FileDataExtractor.Controllers
             return View();
         }
 
+        [ActionName("ViewData")]
+        //[RequireRouteValuesAttribute(new[] {"url"})]
         public ActionResult ViewData(string url)
         {
-            
             //DataTable stored in session
             Session.Add("url", url);
-
+            
             RemoteFile URL = new RemoteFile();
             StreamReader sr = URL.GetCSV(url);
             DataTable dt = URL.parseFile(sr);
+
+            DataTable Model = dt;
             
-            return View(dt);
+            //Store DataTable in session
+            Session.Add("dt", Model);
+            Session.Add("FullDT", Model);
+
+
+            return View("ViewData");
+        }
+
+        //ViewData override for filtered data
+        [ActionName("FilterData")]
+        //[RequireRouteValuesAttribute(new[] { "column", "sign", "operand", "sortOrder" })]
+        public ActionResult ViewData(string column, string sign, int operand, string sortOrder)
+        {
+
+            //call DataTable stored in session
+            var dt = Session["FullDT"] as DataTable;
+
+            FilteredDT dtSorted = new FilteredDT();
+            
+            DataTable Model = dtSorted.FilterData(column, sign, operand, sortOrder, dt);
+
+            //Remove the original DT from session
+            Session.Remove("dt");
+            //Store sorted DataTable in session
+            Session.Add("dt", Model);
+
+            return View("ViewData");
+
         }
 
         // Filter controller calls
@@ -49,14 +77,14 @@ namespace FileDataExtractor.Controllers
             return View();
         }
 
-        public ActionResult FilteredDataView(string column, string sign, int operand, string url, string sortOrder)
-        {
-            var dt = Session["dt"] as DataTable;
+        //public ActionResult FilteredDataView(string column, string sign, int operand, string url, string sortOrder)
+        //{
+        //    var dt = Session["dt"] as DataTable;
 
-            FilteredDT dtSorted = new FilteredDT();
+        //    FilteredDT dtSorted = new FilteredDT();
 
-            return View(dtSorted.FilterData(column, sign, operand, url, sortOrder, dt));
-        }
+        //    return View(dtSorted.FilterData(column, sign, operand, sortOrder, dt));
+        //}
 
 
         // Download Controller Calls

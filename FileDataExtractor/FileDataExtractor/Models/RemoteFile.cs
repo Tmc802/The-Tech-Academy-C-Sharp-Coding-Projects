@@ -6,9 +6,6 @@ using System.Net;
 
 namespace FileDataExtractor.Models
 {
-
-
-
     public class RemoteFile
     {
 
@@ -46,7 +43,7 @@ namespace FileDataExtractor.Models
                         {
                             for (int j = 0; j < rowValues.Count(); j++)
                             {
-                                dtCsv.Columns.Add(rowValues[j]); // add headers
+                                dtCsv.Columns.Add(rowValues[j],typeof(Double)); // add headers
                             }
                         }
                         else
@@ -55,7 +52,8 @@ namespace FileDataExtractor.Models
                             for (int k = 0; k < rowValues.Count(); k++)
                             {
                                 /*var rowV =*/
-                                dr[k] = rowValues[k].ToString();
+                                /* Needs .ToString(); */
+                                dr[k] = rowValues[k];
 
                                 //dr[k] = Convert.ToDouble(rowV);
                             }
